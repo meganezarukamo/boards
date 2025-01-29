@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}
+Board | Home
+{% endblock %}
+{% block content %}
+
+
+<div class='container'>
+    <div class='content'>
+        <h1>Todo</h1>
+        <h2>やりたいことリスト</h2>
+    </div>
+</div>
+
+<table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>User Name</th>
+        <th>Post</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for post in posts %}
+      <tr>
+        <th>{{ post.id }}</th>
+        <td>{{ post.name }}</td>
+        <td>{{ post.micropost }}</td>
+        <td>
+          <a href="{% url 'todo:edit_post' post_id=post.id %}">修正</a>
+          <a href="{% url 'todo:delete_post' post_id=post.id %}">削除</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+<a href="{% url 'todo:create_post' %}">作成</a> 
+{% endblock %}

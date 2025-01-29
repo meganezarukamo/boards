@@ -25,5 +25,9 @@ app_name = "apps"
 urlpatterns = [
     path("", views.HomeView.as_view(), name="index"),
     path("login/", include("login.urls")),
+    path("todo/", include("todo.urls")),
+    path("pictures/", include("pictures.urls")),
     path("admin/", admin.site.urls),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+if settings.DEBUG:
+    urlpatterns += static(settings.IMAGE_URL, document_root=settings.IMAGE_ROOT)
