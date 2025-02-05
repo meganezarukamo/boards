@@ -15,16 +15,22 @@ def index(request):
 def image_upload(request):
     if request.method == "POST":
         form = BookForm(request.POST, request.FILES)
-        if form_is_valid():
+        if form.is_valid():
             form.save()
-            return redirect("image_list")  # アップロード後に画像一覧にリダイレクト
+            return redirect(
+                "pictures:image_list"
+            )  # アップロード後に画像一覧にリダイレクト
     else:
         form = BookForm()
         return render(request, "pictures/image.html", {"form": form})
 
 
 def image_list(request):
-    images = Image.object.all()
+    images = Book.objects.all()
     return render(request, "pictures/index.html", {"images": images})
 
-def image_delete()
+
+def image_delete(request, pk):
+    image = Book.objects.get(pk=pk)
+    image.delete()  # 削除
+    return redirect("pictures:image_list")  # 削除後、画像一覧にリダイレクト

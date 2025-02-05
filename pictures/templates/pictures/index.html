@@ -11,4 +11,17 @@ Board | Home
         <h2>写真を保存</h2>
     </div>
 </div>
+
+<h1>画像一覧</h1>
+<ul>
+    {% for image in images %}
+        <li>
+            <img src="{{ image.image.url }}" alt="{{ image.title }}" width="100">
+            {{ image.title }}
+            <a href="{% url 'pictures:image_delete' image.pk %}">削除</a>
+        </li>
+    {% endfor %}
+</ul>
+
+<a href="{% url 'pictures:image_upload' %}">画像をアップロード</a>
 {% endblock %}
